@@ -1,0 +1,42 @@
+version: "3.8"
+
+services:
+  main-local:
+    image: main
+    build:
+      context: .
+      target: local
+      dockerfile: Dockerfile
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    networks:
+      - backend
+  postgis-local:
+    image: postgis/postgis:14-3.2-alpine
+    container_name: postgis-local
+    restart: unless-stopped
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    ports:
+      - "6378:5432"
+    volumes:
+      - ./tmp/postgresql:/var/lib/postgresql/data:delegated
+    networks:
+      - backend
+  redis-local:
+    image: redis:6.2.6-alpine
+    container_name: redis-local
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./tmp/redis:/data:delegated
+    networks:
+      - backend
+
+networks:
+  backend:

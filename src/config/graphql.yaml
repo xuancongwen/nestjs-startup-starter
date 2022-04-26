@@ -1,0 +1,6 @@
+defaults: &defaults
+  playground: true
+
+local:
+  <<: *defaults
+  debug: true

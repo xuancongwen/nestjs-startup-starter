@@ -1,0 +1,9 @@
+defaults: &defaults
+  type: postgres
+
+local:
+  <<: *defaults
+  host: postgis-local
+  port: 5432
+  username: localuser
+  database: localdb
