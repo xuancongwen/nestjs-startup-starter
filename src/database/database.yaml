@@ -7,3 +7,24 @@ local:
   port: 5432
   username: localuser
   database: localdb
+
+staging: # TODO: Requires configuration
+  <<: *defaults
+  host: postgis-staging
+  port: 5432
+  username: staginguser
+  database: stagingdb
+
+test: # TODO: Requires configuration
+  <<: *defaults
+  host: postgis-test
+  port: 5432
+  username: testuser
+  database: testdb
+
+production: # TODO: Requires configuration
+  <<: *defaults
+  host: postgis-production
+  port: 5432
+  username: productionuser
+  database: productiondb
